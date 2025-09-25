@@ -6,7 +6,7 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 
 class ListingForm
 {
@@ -26,7 +26,8 @@ class ListingForm
                     ->required(true),
                 TextInput::make('price')
                     ->required(true),
-                Textarea::make('description')
+                RichEditor::make('description')
+                    ->columnSpanFull()
                     ->required(true),
                 Select::make('package')
                     ->relationship('packages', 'name')

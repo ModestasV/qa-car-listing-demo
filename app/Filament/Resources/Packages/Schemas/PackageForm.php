@@ -5,7 +5,7 @@ namespace App\Filament\Resources\Packages\Schemas;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 
 class PackageForm
 {
@@ -20,7 +20,8 @@ class PackageForm
                 TextInput::make('duration')
                     ->numeric()
                     ->required(true),
-                Textarea::make('features')
+                RichEditor::make('features')
+                    ->columnSpanFull()
                     ->required(true)
             ]);
     }
