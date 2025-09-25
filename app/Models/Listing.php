@@ -38,4 +38,9 @@ class Listing extends Model
     {
         return $this->hasMany(ListingImage::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

@@ -6,7 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Actions\Action;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 
@@ -34,7 +34,30 @@ class ListingsTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('favorites')
+                    ->label(function ($record) {
+                        if ($record->favorites->where('user_id', auth()->user()->id)->first()) {
+                            return 'Remove from Favorites';
+                        } else {
+                            return 'Add to Favorites';
+                        }
+                    })
+                    ->icon('heroicon-o-heart')
+                    ->color(function ($record) {
+                        return $record->favorites->where('user_id', auth()->user()->id)->first() ? 'danger' : 'success';
+                    })
+                    ->action(function ($record) {
+                        if ($record->favorites->where('user_id', auth()->user()->id)->first()) {
+                            return $record->favorites->where('user_id', auth()->user()->id)->first()->delete();
+                        } else {
+                            return $record->favorites()->create([
+                                'listing_id' => $record->id,
+                                'user_id' => auth()->user()->id,
+                            ]);
+                        }
+                    })
             ])
+            ->headerActions([])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

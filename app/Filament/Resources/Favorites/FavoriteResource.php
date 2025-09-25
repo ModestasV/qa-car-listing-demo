@@ -21,11 +21,6 @@ class FavoriteResource extends Resource
     protected static ?string $model = Favorite::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
-    
-    public static function form(Schema $schema): Schema
-    {
-        return FavoriteForm::configure($schema);
-    }
 
     public static function infolist(Schema $schema): Schema
     {

@@ -17,7 +17,10 @@ class FavoritesTable
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('listing.make_id'),
+                TextColumn::make('listing.make.name')
+                    ->getStateUsing(function ($record) {
+                        return $record->listing->make->name . ', ' . $record->listing->carModel->name;
+                    }),
                 TextColumn::make('user.name'),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -25,10 +28,7 @@ class FavoritesTable
             ->filters([
                 //
             ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-            ])
+            ->recordActions([])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
