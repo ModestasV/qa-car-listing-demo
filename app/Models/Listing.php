@@ -10,12 +10,12 @@ class Listing extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'make_id', 
-        'model_id', 
-        'engine', 
-        'gearbox', 
-        'price', 
-        'description', 
+        'make_id',
+        'model_id',
+        'engine',
+        'gearbox',
+        'price',
+        'description',
         'package'
     ];
 
@@ -32,5 +32,10 @@ class Listing extends Model
     public function packages()
     {
         return $this->belongsToMany(Package::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ListingImage::class);
     }
 }

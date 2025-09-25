@@ -18,7 +18,10 @@ class ListingImagesTable
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('listing.make_id'),
+                TextColumn::make('listing.make.name')
+                    ->getStateUsing(function ($record) {
+                        return $record->listing->make->name . ', ' . $record->listing->carModel->name;
+                    }),
                 ImageColumn::make('image'),
                 TextColumn::make('title'),
                 TextColumn::make('created_at')

@@ -2,26 +2,27 @@
 
 namespace App\Filament\Resources\Listings;
 
-use App\Filament\Resources\Listings\Pages\CreateListing;
-use App\Filament\Resources\Listings\Pages\EditListing;
-use App\Filament\Resources\Listings\Pages\ListListings;
-use App\Filament\Resources\Listings\Pages\ViewListing;
-use App\Filament\Resources\Listings\Schemas\ListingForm;
-use App\Filament\Resources\Listings\Schemas\ListingInfolist;
-use App\Filament\Resources\Listings\Tables\ListingsTable;
-use App\Models\Listing;
-use BackedEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Tables\Table;
 use UnitEnum;
+use BackedEnum;
+use App\Models\Listing;
+use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use App\Filament\Resources\Listings\Pages\EditListing;
+use App\Filament\Resources\Listings\Pages\ViewListing;
+use App\Filament\Resources\Listings\Pages\ListListings;
+use App\Filament\Resources\Listings\Pages\CreateListing;
+use App\Filament\Resources\Listings\Schemas\ListingForm;
+use App\Filament\Resources\Listings\Tables\ListingsTable;
+use App\Filament\Resources\Listings\Schemas\ListingInfolist;
+use App\Filament\Resources\Listings\RelationManagers\ImagesRelationManager;
 
 class ListingResource extends Resource
 {
     protected static ?string $model = Listing::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     public static function form(Schema $schema): Schema
     {
         return ListingForm::configure($schema);
@@ -35,6 +36,13 @@ class ListingResource extends Resource
     public static function table(Table $table): Table
     {
         return ListingsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            ImagesRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
