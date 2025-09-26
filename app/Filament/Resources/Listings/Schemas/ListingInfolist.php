@@ -19,7 +19,8 @@ class ListingInfolist
                 TextEntry::make('gearbox'),
                 TextEntry::make('price')
                     ->money(),
-                TextEntry::make('description'),
+                TextEntry::make('description')
+                    ->html(),
                 TextEntry::make('created_at')
                     ->dateTime(),
                 TextEntry::make('packages.name')

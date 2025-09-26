@@ -23,7 +23,8 @@ class ListingsTable
                 TextColumn::make('gearbox'),
                 TextColumn::make('price')
                     ->money(),
-                TextColumn::make('description'),
+                TextColumn::make('description')
+                    ->html(),
                 TextColumn::make('created_at')
                     ->dateTime(),
                 TextColumn::make('packages.name')
